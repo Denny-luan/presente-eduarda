@@ -1,0 +1,365 @@
+:root {
+  color-scheme: dark;
+  --fundo: #190b20;
+  --painel: rgba(48, 23, 48, 0.91);
+  --rosa: #ff75ad;
+  --rosa-claro: #ffd3e5;
+  --texto: #fff2f7;
+  --suave: #d9bdce;
+  --vinho: #9d285e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--fundo);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse at 50% 10%, #492044 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 100%, #32132e 0%, transparent 55%),
+    var(--fundo);
+  color: var(--texto);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--rosa-claro);
+  outline-offset: 4px;
+}
+
+.fundo-brilhos {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(circle, #ffc6df 1px, transparent 1.5px),
+    radial-gradient(circle, #e88bb9 1px, transparent 1.5px);
+  background-size: 73px 83px, 113px 127px;
+  background-position: 10px 20px, 40px 60px;
+  animation: brilhos 8s ease-in-out infinite alternate;
+}
+
+#coracoes {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.coracao-flutuante {
+  position: absolute;
+  bottom: -50px;
+  color: var(--rosa);
+  opacity: 0;
+  animation: subir linear forwards;
+  text-shadow: 0 0 16px rgba(255, 90, 160, 0.5);
+  user-select: none;
+}
+
+.experiencia {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 32px, 650px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding:
+    max(24px, env(safe-area-inset-top))
+    0
+    max(24px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.assinatura {
+  margin-bottom: 28px;
+  color: var(--rosa);
+  font-size: 10px;
+  letter-spacing: 3px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.tela {
+  width: 100%;
+  padding: clamp(24px, 6vw, 42px);
+  border: 1px solid rgba(255, 150, 198, 0.23);
+  border-radius: 26px;
+  background: var(--painel);
+  box-shadow:
+    0 20px 80px rgba(0, 0, 0, 0.22),
+    inset 0 1px rgba(255, 255, 255, 0.04);
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.tela[hidden] {
+  display: none !important;
+}
+
+.tela.ativa {
+  animation: aparecer 650ms ease both;
+}
+
+.coracao-principal,
+.coracao-final {
+  color: var(--rosa);
+  font-size: 82px;
+  line-height: 1.25;
+  text-shadow:
+    0 0 20px rgba(255, 70, 150, 0.5),
+    0 0 60px rgba(255, 70, 150, 0.2);
+  animation: pulsar 1.8s ease-in-out infinite;
+}
+
+.envelope {
+  width: 92px;
+  height: 72px;
+  margin: 0 auto 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 180, 215, 0.65);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #b43a76, #63204d);
+  box-shadow: 0 0 38px rgba(255, 80, 155, 0.2);
+  transform: rotate(-4deg);
+}
+
+.envelope span {
+  color: #ffe0ed;
+  font-size: 38px;
+  animation: pulsar 1.8s ease-in-out infinite;
+}
+
+.sobretitulo {
+  margin: 0 0 12px;
+  color: var(--rosa);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+h1,
+h2 {
+  margin: 0;
+  color: var(--rosa-claro);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(32px, 8vw, 48px);
+}
+
+h2 {
+  font-size: clamp(27px, 6vw, 37px);
+}
+
+.descricao {
+  margin: 20px 0 28px;
+  color: var(--suave);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.botao {
+  min-height: 50px;
+  padding: 14px 22px;
+  border: 1px solid rgba(255, 190, 220, 0.55);
+  border-radius: 999px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.botao.principal {
+  background: linear-gradient(135deg, #b93978, #7e245b);
+  color: white;
+  box-shadow: 0 7px 26px rgba(160, 36, 98, 0.22);
+}
+
+.botao:hover {
+  background: linear-gradient(135deg, #d44b8d, #96336e);
+  box-shadow: 0 8px 30px rgba(255, 75, 155, 0.22);
+}
+
+.botao:active {
+  transform: scale(0.97);
+}
+
+.dica {
+  margin: 20px 0 0;
+  color: #c8a6bb;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.mini-coracao {
+  margin-bottom: 8px;
+  color: var(--rosa);
+  font-size: 30px;
+}
+
+.carta {
+  margin: 26px 0;
+  padding: 23px 20px;
+  border-left: 2px solid var(--rosa);
+  border-radius: 4px 14px 14px 4px;
+  background: rgba(255, 255, 255, 0.035);
+  text-align: left;
+}
+
+#texto-carta {
+  min-height: 120px;
+  margin: 0;
+  color: var(--texto);
+  font-size: 15px;
+  line-height: 1.95;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.assinatura-carta {
+  display: block;
+  margin-top: 18px;
+  color: var(--rosa-claro);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  text-align: right;
+}
+
+#continuar[hidden] {
+  display: none;
+}
+
+.mensagem-final {
+  margin: 23px 0 0;
+  color: var(--texto);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.mensagem-final.secundario {
+  color: var(--suave);
+  font-size: 14px;
+}
+
+.acoes-finais {
+  margin-top: 28px;
+}
+
+footer {
+  margin-top: 25px;
+  color: #a98aa1;
+  font-size: 9px;
+  letter-spacing: 2px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulsar {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.09);
+  }
+}
+
+@keyframes subir {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+
+  12% {
+    opacity: 0.7;
+  }
+
+  85% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-115vh) rotate(30deg);
+  }
+}
+
+@keyframes brilhos {
+  from {
+    opacity: 0.25;
+  }
+
+  to {
+    opacity: 0.65;
+  }
+}
+
+@media (max-width: 420px) {
+  .experiencia {
+    width: min(100% - 22px, 650px);
+  }
+
+  .assinatura {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .tela {
+    padding: 27px 19px;
+    border-radius: 22px;
+  }
+
+  .carta {
+    padding: 19px 15px;
+  }
+
+  #texto-carta {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
